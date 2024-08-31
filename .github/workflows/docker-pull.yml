@@ -56,6 +56,7 @@ jobs:
           docker pull --platform ${{ github.event.inputs.ARCH }} ${{ github.event.inputs.IMAGE_NAME }}
           docker images 
           docker tag ${{ github.event.inputs.IMAGE_NAME }} ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/${{ github.event.inputs.NEW_NAME }}
+          docker images
           docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/${{ github.event.inputs.NEW_NAME }}
         continue-on-error: true
 
