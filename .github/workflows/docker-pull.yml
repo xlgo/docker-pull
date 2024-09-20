@@ -67,7 +67,7 @@ jobs:
           
           docker pull --platform ${{ github.event.inputs.ARCH }} docker.elastic.co/elasticsearch/elasticsearch:7.17.24
           docker pull --platform ${{ github.event.inputs.ARCH }} docker.elastic.co/kibana/kibana:7.17.24
-          docker pull --platform ${{ github.event.inputs.ARCH }} docker pull docker.elastic.co/beats/filebeat:7.17.24
+          docker pull --platform ${{ github.event.inputs.ARCH }} docker.elastic.co/beats/filebeat:7.17.24
           
           
           
