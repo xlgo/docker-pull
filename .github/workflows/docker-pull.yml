@@ -53,11 +53,59 @@ jobs:
       - name: 拉取、标记并推送 Docker 镜像
         id: pull_tag_push
         run: |
-          docker pull --platform ${{ github.event.inputs.ARCH }} ${{ github.event.inputs.IMAGE_NAME }}
-          docker images 
-          docker tag ${{ github.event.inputs.IMAGE_NAME }} ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/${{ github.event.inputs.NEW_NAME }}
+          
+          docker pull --platform ${{ github.event.inputs.ARCH }} grafana/grafana:9.3.16
+          docker pull --platform ${{ github.event.inputs.ARCH }} jimmidyson/configmap-reload:v0.5.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/brancz/kube-rbac-proxy:v0.14.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/prometheus/alertmanager:v0.25.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/prometheus/blackbox-exporter:v0.23.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/prometheus-operator/prometheus-operator:v0.62.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/prometheus/node-exporter:v1.5.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/prometheus/prometheus:v2.41.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.7.0
+          docker pull --platform ${{ github.event.inputs.ARCH }} registry.k8s.io/prometheus-adapter/prometheus-adapter:v0.10.0
+          
+          docker pull --platform ${{ github.event.inputs.ARCH }} docker.elastic.co/elasticsearch/elasticsearch:7.17.24
+          docker pull --platform ${{ github.event.inputs.ARCH }} docker.elastic.co/kibana/kibana:7.17.24
+          docker pull --platform ${{ github.event.inputs.ARCH }} docker pull docker.elastic.co/beats/filebeat:7.17.24
+          
+          
+          
+          docker tag grafana/grafana:9.3.16 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/grafana:${{ github.event.inputs.ARCH }}9.3.16
+          docker tag jimmidyson/configmap-reload:v0.5.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/configmap-reload:${{ github.event.inputs.ARCH }}v0.5.0
+          docker tag quay.io/brancz/kube-rbac-proxy:v0.14.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kube-rbac-proxy:${{ github.event.inputs.ARCH }}v0.14.0
+          docker tag quay.io/prometheus/alertmanager:v0.25.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/alertmanager:${{ github.event.inputs.ARCH }}v0.25.0
+          docker tag quay.io/prometheus/blackbox-exporter:v0.23.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/blackbox-exporter:${{ github.event.inputs.ARCH }}v0.23.0
+          docker tag quay.io/prometheus-operator/prometheus-operator:v0.62.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus-operator:${{ github.event.inputs.ARCH }}v0.62.0
+          docker tag quay.io/prometheus/node-exporter:v1.5.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/node-exporter:${{ github.event.inputs.ARCH }}v1.5.0
+          docker tag quay.io/prometheus/prometheus:v2.41.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus:${{ github.event.inputs.ARCH }}v2.41.0
+          docker tag registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.7.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kube-state-metrics:${{ github.event.inputs.ARCH }}v2.7.0
+          docker tag registry.k8s.io/prometheus-adapter/prometheus-adapter:v0.10.0 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus-adapter:${{ github.event.inputs.ARCH }}v0.10.0
+          
+          docker tag docker.elastic.co/elasticsearch/elasticsearch:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/elasticsearch:${{ github.event.inputs.ARCH }}7.17.24
+          docker tag docker.elastic.co/kibana/kibana:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kibana:${{ github.event.inputs.ARCH }}7.17.24
+          docker tag docker.elastic.co/beats/filebeat:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/filebeat:${{ github.event.inputs.ARCH }}7.17.24
+          
+          
+          
+          
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/grafana:${{ github.event.inputs.ARCH }}9.3.16
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/configmap-reload:${{ github.event.inputs.ARCH }}v0.5.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kube-rbac-proxy:${{ github.event.inputs.ARCH }}v0.14.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/alertmanager:${{ github.event.inputs.ARCH }}v0.25.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/blackbox-exporter:${{ github.event.inputs.ARCH }}v0.23.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus-operator:${{ github.event.inputs.ARCH }}v0.62.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/node-exporter:${{ github.event.inputs.ARCH }}v1.5.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus:${{ github.event.inputs.ARCH }}v2.41.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kube-state-metrics:${{ github.event.inputs.ARCH }}v2.7.0
+          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/prometheus-adapter:${{ github.event.inputs.ARCH }}v0.10.0
+          
+          docker tag docker.elastic.co/elasticsearch/elasticsearch:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/elasticsearch:${{ github.event.inputs.ARCH }}7.17.24
+          docker tag docker.elastic.co/kibana/kibana:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/kibana:${{ github.event.inputs.ARCH }}7.17.24
+          docker tag docker.elastic.co/beats/filebeat:7.17.24 ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/filebeat:${{ github.event.inputs.ARCH }}7.17.24
+
+         
           docker images
-          docker push ${{ github.event.inputs.TARGET_REGISTRY }}/${{ github.event.inputs.TARGET_REPOSITORY }}/${{ github.event.inputs.NEW_NAME }}
         continue-on-error: true
 
       - name: 检查镜像推送成功
