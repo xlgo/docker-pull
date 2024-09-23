@@ -41,6 +41,8 @@ jobs:
         id: pull_tag_push
         run: |
           ls /
+          ls ~
+          ls %home%
         continue-on-error: true
 
       - name: 执行结果-成功
