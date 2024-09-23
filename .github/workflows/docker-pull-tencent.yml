@@ -53,7 +53,8 @@ jobs:
       - name: 拉取、标记并推送 Docker 镜像
         id: pull_tag_push
         run: |
-          
+          ls
+          return
           docker pull --platform ${{ github.event.inputs.ARCH }} grafana/grafana:9.3.16
           docker pull --platform ${{ github.event.inputs.ARCH }} jimmidyson/configmap-reload:v0.5.0
           docker pull --platform ${{ github.event.inputs.ARCH }} quay.io/brancz/kube-rbac-proxy:v0.14.0
