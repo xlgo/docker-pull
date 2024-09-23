@@ -40,9 +40,11 @@ jobs:
       - name: 处理文件
         id: pull_tag_push
         run: |
-          ls /
+          ls 
+          echo 1
           ls ~
-          ls %home%
+          echo 2
+          pwd
         continue-on-error: true
 
       - name: 执行结果-成功
