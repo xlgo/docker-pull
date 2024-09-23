@@ -40,6 +40,8 @@ jobs:
       - name: 处理文件
         id: pull_tag_push
         run: |
+          find / -name images.txt
+          env
           ls work
           echo 1
           ls ~
