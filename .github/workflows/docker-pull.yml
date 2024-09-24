@@ -18,7 +18,7 @@ on:
       TARGET_REPOSITORY:
         description: '空间名称'
         required: true
-        default: 'aopkcn'
+        default: 'xlgo'
       ARCH:
         description: '系统架构'
         required: true
@@ -34,8 +34,10 @@ on:
           - ppc64le
 
 jobs:
-  build:
+  pull-and-push:
     runs-on: ubuntu-latest
+    env:
+      TAG_PREFIX: ${{ inputs.TARGET_REGISTRY }}/${{ inputs.TARGET_REPOSITORY }}/
     steps:
       - name: 拉取代码
         uses: actions/checkout@v4
@@ -49,7 +51,7 @@ jobs:
 
       - name: 执行结果-成功
         if: ${{ steps.pull_tag_push.outcome == 'success' }}
-        run: echo "命令执行成功"
+        run: echo $TAG_PREFIX"命令执行成功"
 
       - name: 执行结果-失败
         if: ${{ steps.pull_tag_push.outcome != 'success' }}
