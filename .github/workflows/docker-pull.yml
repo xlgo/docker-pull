@@ -37,10 +37,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
       - name: 处理文件
         id: pull_tag_push
         run: |
           find / -name images.txt
+          ls $GITHUB_WORKSPACE 
           env
           ls work
           echo 1
