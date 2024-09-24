@@ -42,14 +42,13 @@ jobs:
       - name: 处理文件
         id: pull_tag_push
         run: |
-          find / -name images.txt
+          pwd
           ls $GITHUB_WORKSPACE 
           env
           ls work
           echo 1
           ls ~
           echo 2
-          pwd
         continue-on-error: true
 
       - name: 执行结果-成功
