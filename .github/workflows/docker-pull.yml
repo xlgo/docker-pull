@@ -48,6 +48,7 @@ jobs:
           for image in $(cat images.txt); do
             docker pull --platform ${{ inputs.ARCH }} $image
             docker tag  $image $TAG_PREFIX$image-${{ inputs.ARCH }}
+            docker push $TAG_PREFIX$image-${{ inputs.ARCH }}
           done
           docker images |grep ${{ inputs.TARGET_REPOSITORY }}
         continue-on-error: true
