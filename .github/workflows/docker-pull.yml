@@ -42,7 +42,7 @@ jobs:
       - name: 处理文件
         id: pull_tag_push
         run: |
-          for line in $(cat listtest.txt); do
+          for line in $(cat images.txt); do
             echo $line
           done
         continue-on-error: true
