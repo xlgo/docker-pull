@@ -37,9 +37,11 @@ jobs:
       - name: 处理文件
         id: pull_tag_push
         run: |
-          for line in $(cat images.txt); do
-            echo ${TAG_PREFIX}$line
+          for image in $(cat images.txt); do
+            docker pull --platform ${{ inputs.ARCH }} $image
+            docker tag  $image $TAG_PREFIX$image-${{ inputs.ARCH }}
           done
+          docker images |grep ${{ inputs.TARGET_REPOSITORY }}
         continue-on-error: true
 
       - name: 执行结果-成功
