@@ -6,7 +6,7 @@ on:
       TARGET_REGISTRY:
         description: '仓库地址'
         required: true
-        default: 'registry.cn-hangzhou.aliyuncs.com'
+        default: 'swr.cn-east-3.myhuaweicloud.com'
       TARGET_REPOSITORY:
         description: '空间名称'
         required: true
@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: 拉取images.txt文件
         uses: actions/checkout@v4
-      - name: 登录到 华为docker 仓库
+      - name: 登录到 Docker 仓库
         id: login
         run: docker login -u ${{ secrets.HUAWEI_DOCKER_USERNAME }} -p ${{ secrets.HUAWEI_DOCKER_PASSWORD }} ${{ github.event.inputs.TARGET_REGISTRY }}
         continue-on-error: true  
