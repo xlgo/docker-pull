@@ -34,7 +34,15 @@ jobs:
     steps:
       - name: 拉取images.txt文件
         uses: actions/checkout@v4
-      - name: 处理文件
+      - name: 登录到 华为docker 仓库
+        id: login
+        run: docker login -u ${{ secrets.HUAWEI_DOCKER_USERNAME }} -p ${{ secrets.HUAWEI_DOCKER_PASSWORD }} ${{ github.event.inputs.TARGET_REGISTRY }}
+        continue-on-error: true  
+      - name: 检查 Docker 登录失败
+        if: ${{ steps.login.outcome != 'success' }}
+        run: echo "Docker 登录失败"  
+      - name: 拉取镜像并上传
+        if: ${{ steps.login.outcome == 'success' }}
         id: pull_tag_push
         run: |
           for image in $(cat images.txt); do
@@ -43,11 +51,10 @@ jobs:
           done
           docker images |grep ${{ inputs.TARGET_REPOSITORY }}
         continue-on-error: true
-
-      - name: 执行结果-成功
+      - name: 任务结果-成功
         if: ${{ steps.pull_tag_push.outcome == 'success' }}
         run: echo "命令执行成功"
 
-      - name: 执行结果-失败
+      - name: 任务结果-失败
         if: ${{ steps.pull_tag_push.outcome != 'success' }}
         run: echo "命令执行失败"
