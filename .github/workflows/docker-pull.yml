@@ -3,14 +3,6 @@ name: 拉取镜像推送
 on:
   workflow_dispatch:
     inputs:
-      IMAGE_NAME:
-        description: '原镜像名称:版本'
-        required: true
-        default: '-'
-      NEW_NAME:
-        description: '同步后镜像名称:版本'
-        required: true
-        default: '-'
       TARGET_REGISTRY:
         description: '仓库地址'
         required: true
@@ -35,23 +27,24 @@ on:
 
 jobs:
   pull-and-push:
+    name: 拉取镜像并上传到指定仓库
     runs-on: ubuntu-latest
     env:
       TAG_PREFIX: ${{ inputs.TARGET_REGISTRY }}/${{ inputs.TARGET_REPOSITORY }}/
     steps:
-      - name: 拉取代码
+      - name: 拉取images.txt文件
         uses: actions/checkout@v4
       - name: 处理文件
         id: pull_tag_push
         run: |
           for line in $(cat images.txt); do
-            echo $line
+            echo ${TAG_PREFIX}$line
           done
         continue-on-error: true
 
       - name: 执行结果-成功
         if: ${{ steps.pull_tag_push.outcome == 'success' }}
-        run: echo $TAG_PREFIX"命令执行成功"
+        run: echo "命令执行成功"
 
       - name: 执行结果-失败
         if: ${{ steps.pull_tag_push.outcome != 'success' }}
