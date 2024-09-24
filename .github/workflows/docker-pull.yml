@@ -1,4 +1,4 @@
-name: 拉取镜像推送
+name: 华为镜像推送
 
 on:
   workflow_dispatch:
