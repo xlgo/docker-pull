@@ -1,14 +1,2 @@
-quay.io/prometheus/alertmanager:v0.25.0
-quay.io/prometheus/blackbox-exporter:v0.23.0
-jimmidyson/configmap-reload:v0.5.0
-quay.io/brancz/kube-rbac-proxy:v0.14.0
-grafana/grafana:9.3.16
-registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.7.0
-quay.io/brancz/kube-rbac-proxy:v0.14.0
-quay.io/brancz/kube-rbac-proxy:v0.14.0
-quay.io/prometheus/node-exporter:v1.5.0
-quay.io/brancz/kube-rbac-proxy:v0.14.0
-registry.k8s.io/prometheus-adapter/prometheus-adapter:v0.10.0
-quay.io/prometheus-operator/prometheus-operator:v0.62.0
-quay.io/brancz/kube-rbac-proxy:v0.14.0
-quay.io/prometheus/prometheus:v2.41.0
+apache/apisix:3.10.0-debian
+apache/apisix-dashboard:3.0.1-centos
