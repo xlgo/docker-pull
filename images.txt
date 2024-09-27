@@ -1,1 +1,1 @@
-nginx
+bitnami/kafka-exporter:1.7.0
