@@ -1,2 +1,1 @@
-apache/apisix:3.10.0-debian
-apache/apisix-dashboard:3.0.1-centos
+nginx
