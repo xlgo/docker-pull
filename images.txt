@@ -1,4 +1,4 @@
-mysql:8.0
+mysql:8.0.39
 mysql:5.7
 nobodyiam/apollo-quick-start:2.2.0
 apache/apisix:3.11.0-redhat
