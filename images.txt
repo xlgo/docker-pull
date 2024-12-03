@@ -1,1 +1,6 @@
-apache/apisix:3.11.0-debian
+apache/apisix:3.1.0-centos
+apache/apisix:3.2.2-centos
+apache/apisix:3.3.0-centos
+apache/apisix:3.4.1-centos
+apache/apisix:3.5.0-centos
+
