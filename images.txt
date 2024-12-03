@@ -1,1 +1,1 @@
-bitnami/etcd:3.5.16
+apache/apisix:3.11.0-debian
