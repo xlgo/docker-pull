@@ -1,6 +1,4 @@
-apache/apisix:3.1.0-centos
-apache/apisix:3.2.2-centos
-apache/apisix:3.3.0-centos
-apache/apisix:3.4.1-centos
-apache/apisix:3.5.0-centos
-
+apachepulsar/pulsar:4.0.1
+apachepulsar/pulsar:3.0.8
+apachepulsar/pulsar-manager:v0.4.0
+apachepulsar/pulsar-manager:v0.3.0
