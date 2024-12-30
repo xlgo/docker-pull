@@ -1,4 +1,3 @@
-nginx:1.26.2
-nginx:1.24.0
-nginx:1.22.1
-
+calico/node:v3.28.2
+calico/cni:v3.28.2
+calico/kube-controllers:v3.28.2
