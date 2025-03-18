@@ -1,1 +1,1 @@
-mintplexlabs/anythingllm:master
+docker pull jenkins/jenkins:latest-jdk21
