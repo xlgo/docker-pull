@@ -1,1 +1,2 @@
-onlyoffice/documentserver:8.3
+apache/apisix:3.5.0-centos
+apache/apisix-dashboard:3.0.1-centos
