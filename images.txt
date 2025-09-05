@@ -1,1 +1,7 @@
-onlyoffice/documentserver:9.0
+redis:6.2.19
+nacos/nacos-server:v2.4.3
+nginx:1.24.0
+mysql:5.7
+emqx:5.2
+panjjo/zlmediakit:1.2.9
+zlmediakit/zlmediakit:master
