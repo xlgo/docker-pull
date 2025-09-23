@@ -10,7 +10,7 @@
       在 `Settings`-`Secrets and variables`-`Actions` 选择 `New repository secret` 新建 `HUAWEI_DOCKER_USERNAME`（你的其它镜像服务用户名）
       和 `HUAWEI_DOCKER_PASSWORD`（你的其它镜像服务密码）两个 Secrets
 
-2. 在 images.txt 中填写要拉去的镜像，每行一个
+2. 在 images.txt 中填写要拉取的镜像，每行一个，不要带`docker pull`
       
 4. 在 `Actions` 里选择 `拉取镜像推送` ，在右边点击 `Run workfow`
 
