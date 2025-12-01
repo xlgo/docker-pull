@@ -1,3 +1,2 @@
-cycoresystems/kamailio:latest
-kamailio/kamailio-ci:5.4.7-alpine
-kamailio/kamailio-store:6.0.5-centos-8.amd64
+josingcjx/db-data4test:5.0
+josingcjx/data4test:5.0
