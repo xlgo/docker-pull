@@ -1,2 +1,3 @@
-postgres:17.7-alpine
-postgres:17.7
+cycoresystems/kamailio:latest
+kamailio/kamailio-ci:5.4.7-alpine
+kamailio/kamailio-store:6.0.5-centos-8.amd64
