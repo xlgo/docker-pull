@@ -1,4 +1,3 @@
-apache/kafka:4.1.1
-redis:8.4.0
-apache/kafka:3.9.1
-redis:7.4
+oliver006/redis_exporter:v1.80.1
+prometheuscommunity/postgres-exporter:v0.18.1
+danielqsj/kafka-exporter:v1.9.0
