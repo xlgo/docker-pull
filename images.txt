@@ -1,2 +1,4 @@
-josingcjx/db-data4test:5.0
-josingcjx/data4test:5.0
+apache/kafka:4.1.1
+redis:8.4.0
+apache/kafka:3.9.1
+redis:7.4
