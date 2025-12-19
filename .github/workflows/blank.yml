@@ -10,4 +10,6 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
+          echo "UTC Time: $(date -u)"
+          echo "Beijing Time: $(date -d '+8 hours')"
           curl www.baidu.com/$TT
