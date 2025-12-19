@@ -3,6 +3,7 @@ on:
   schedule:
   # 0时区
   - cron: '2/5 6-7 * * *'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
