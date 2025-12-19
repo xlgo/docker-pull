@@ -13,6 +13,7 @@ jobs:
           echo "Beijing Time: $(date -d '+8 hours')"
           checkin='https://glados.rocks/api/user/checkin'
           echo "${{ secrets.GLADOS_COOKIES }}" | while IFS= read -r cookie; do
+            echo $cookie
             if [ -z "$line" ]; then
               continue  # 跳过空行
             fi
