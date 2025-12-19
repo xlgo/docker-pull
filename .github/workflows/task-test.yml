@@ -1,7 +1,7 @@
 name: task-test
 on:
   schedule:
-  - cron: '30 * * * ? *'
+  - cron: '0/10 13-14 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
