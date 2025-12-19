@@ -1,0 +1,21 @@
+name: glados签到
+on:
+  schedule:
+  # 0时区
+  - cron: '14 0 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 签到
+        run: |
+          echo "Beijing Time: $(date -d '+8 hours')"
+          checkin='https://glados.rocks/api/user/checkin'
+          echo "$GLADOS_COOKIE" | while IFS= read -r cookie; do
+            # 调用签到接口
+            resData=`curl $checkin -b '${cookie}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
+            echo $resData
+            # 暂停1秒
+            sleep 1
+          done
