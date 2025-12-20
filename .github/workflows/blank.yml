@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
-          curl -sS https://glados.rocks/api/user/checkin -b '${cookie}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'  
+          curl https://glados.rocks/api/user/checkin -b '${cookie}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'  
           echo test, and deploy your project.
