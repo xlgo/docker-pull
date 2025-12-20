@@ -1,3 +1,1 @@
-oliver006/redis_exporter:v1.80.1
-prometheuscommunity/postgres-exporter:v0.18.1
-danielqsj/kafka-exporter:v1.9.0
+
