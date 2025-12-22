@@ -2,7 +2,7 @@ name: glados签到
 on:
   schedule:
   # 0时区
-  - cron: '30 0/8 * * *'
+  - cron: '30 0/12 * * *'
   workflow_dispatch:
 jobs:
   build:
