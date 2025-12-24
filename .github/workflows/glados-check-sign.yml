@@ -15,21 +15,16 @@ jobs:
           points='https://glados.space/api/user/points'
           # 调用签到接口
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_36863 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
-          echo $resData
-          curl -sS $points -b '${{ secrets.GLADOS_COOKIE_36863 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0'
-          # 间隔1S
+          echo $resData |jq -r '.message+", total balances is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           sleep 1
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_XL7 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
-          echo $resData
-          curl -sS $points -b '${{ secrets.GLADOS_COOKIE_XL7 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0'
+          echo $resData |jq -r '.message+", total balances is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           # 间隔1S
           sleep 1
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_775151 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
-          echo $resData
-          curl -sS $points -b '${{ secrets.GLADOS_COOKIE_775151 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0'
+          echo $resData |jq -r '.message+", total balances is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           # 间隔1S
           sleep 1
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
-          echo $resData
-          curl -sS $points -b '${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0'
+          echo $resData |jq -r '.message+", total balances is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           
