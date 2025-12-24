@@ -1,0 +1,14 @@
+name: job-test
+on:
+  schedule:
+  # 0时区
+  - cron: '53 0/1 * * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-slim
+    steps:
+      - name: 显示时间
+        run: |
+          echo "Beijing Time: $(date -d '+8 hours')"
+      
