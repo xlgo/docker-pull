@@ -1,1 +1,1 @@
-container-registry.oracle.com/graalvm/native-image:25
+apache/kafka-native:4.1.1
