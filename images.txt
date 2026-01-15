@@ -1,1 +1,2 @@
-apache/kafka-native:4.1.1
+apache/skywalking-ui:10.3.0
+apache/skywalking-oap-server:10.3.0
