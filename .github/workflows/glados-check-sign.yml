@@ -26,6 +26,6 @@ jobs:
           echo $resData |jq -r '.message+". balance is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           # 间隔1S
           sleep 1
-          resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.one"}'`
+          resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.cloud"}'`
           echo $resData |jq -r '.message+". balance is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           
