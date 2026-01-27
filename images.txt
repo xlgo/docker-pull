@@ -1,3 +1,1 @@
-apache/skywalking-ui:10.3.0
-apache/skywalking-oap-server:10.3.0
-apache/skywalking-banyandb:0.9.0
+apache/apisix:3.14.1-debian
