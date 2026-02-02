@@ -15,7 +15,7 @@ jobs:
           points='https://glados.cloud/api/user/points'
           # 调用签到接口
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_36863 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.cloud"}'`
-          echo $resData
+          # echo $resData
           echo $resData |jq -r '.message+". balance is "+(.list[0].balance| tonumber|round | tostring) +" points!"'
           sleep 1
           resData=`curl -sS $checkin -b '${{ secrets.GLADOS_COOKIE_XL7 }}' -H 'Content-Type: application/json' -A 'Mozilla/5.0' -d '{"token":"glados.cloud"}'`
