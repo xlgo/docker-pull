@@ -1,1 +1,2 @@
-apache/apisix:3.14.1-debian
+nacos/nacos-server:v3.1.1
+nacos/nacos-server:v2.5.2
