@@ -1,3 +1,1 @@
-calico/cni:v3.26.5
-calico/node:v3.26.5
-calico/kube-controllers:v3.26.5
+registry.k8s.io/metrics-server/metrics-server:v0.6.4
