@@ -1,3 +1,6 @@
-ubuntu/jre:8-22.04_edge
-tomcat:9.0-jre8
-openjdk:8u342-oraclelinux8
+eclipse-temurin:25-jre
+eclipse-temurin:25-jdk
+eclipse-temurin:8-jre
+eclipse-temurin:8-jdk
+eclipse-temurin:21-jre
+eclipse-temurin:21-jdk
