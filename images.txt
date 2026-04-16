@@ -1,6 +1,3 @@
-eclipse-temurin:25-jre
-eclipse-temurin:25-jdk
-eclipse-temurin:8-jre
-eclipse-temurin:8-jdk
-eclipse-temurin:21-jre
-eclipse-temurin:21-jdk
+alpine:3.23
+ableuler/redis-cluster-proxy:latest
+openeuler/openeuler:22.03
