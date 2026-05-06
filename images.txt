@@ -1,1 +1,1 @@
-sonatype/nexus3:3.91.1
+openresty/openresty:1.29.2.3-4-alpine-fat
