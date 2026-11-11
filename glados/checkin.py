@@ -1,5 +1,4 @@
 import hashlib
-import json
 import os
 import random
 import sys
@@ -74,7 +73,6 @@ class GLaDOSCheckin:
         """执行单账号签到"""
         print(f"\n>>>>>> 开始处理账号: [{account_name}] <<<<<<")
 
-        # 1. 获取挑战
         nonce = self.get_challenge()
         if not nonce:
             print("  [-] 获取 Nonce 失败，可能是 Cookie 已失效")
@@ -82,19 +80,17 @@ class GLaDOSCheckin:
 
         print(f"  [+] 成功获取 Nonce: {nonce[:8]}***")
 
-        # 2. 模拟前端 2.6 ~ 3.5 秒随机延时（规避风控）
+        # 模拟前端行为 2.6 ~ 3.5 秒随机延时
         internal_wait = round(random.uniform(2.6, 3.5), 2)
         print(f"  [*] 模拟前端行为，随机休眠 {internal_wait} 秒...")
         time.sleep(internal_wait)
 
-        # 3. 计算 Proof
+        # 计算 Proof 并提交签到
         proof = self.calculate_proof(nonce)
-
-        # 4. 提交签到
         result = self.submit_checkin(nonce, proof)
         print(f"  [*] 签到结果: {result.get('message', '无响应')}")
 
-        # 5. 查询剩余天数
+        # 查询剩余天数
         status_info = self.get_status()
         if status_info and status_info.get("code") == 0:
             user_data = status_info.get("data", {})
@@ -107,48 +103,21 @@ class GLaDOSCheckin:
 
 def extract_cookies() -> Dict[str, str]:
     """
-    自动提取并整合所有账号 Cookie：
-    1. 优先读取 GitHub Actions 的 SECRETS_CONTEXT
-    2. 兼容本地或系统环境变量中的 GLADOS_COOKIE*
+    自动从系统环境变量中识别所有以 GLADOS_COOKIE 开头的非空变量
     """
     cookies_map = {}
-
-    # 从 GitHub Actions 的全局 Secrets 注入中提取
-    secrets_raw = os.environ.get("SECRETS_CONTEXT")
-    if secrets_raw:
-        try:
-            all_secrets = json.loads(secrets_raw)
-            for key, val in all_secrets.items():
-                if key.upper().startswith("GLADOS_COOKIE") and val.strip():
-                    cookies_map[key] = val.strip()
-        except Exception:
-            pass
-
-    # 从标准环境变量中补全
     for key, val in os.environ.items():
         if key.upper().startswith("GLADOS_COOKIE") and val.strip():
-            if key not in cookies_map:
-                cookies_map[key] = val.strip()
-
-    # 拆分单个变量内可能存在的多账号（支持换行或 & 拼接）
-    final_cookies = {}
-    for name, content in cookies_map.items():
-        parts = [p.strip() for p in content.replace("\n", "&").split("&") if p.strip()]
-        if len(parts) == 1:
-            final_cookies[name] = parts[0]
-        else:
-            for idx, part in enumerate(parts, start=1):
-                final_cookies[f"{name}_SUB{idx}"] = part
-
-    return final_cookies
+            cookies_map[key] = val.strip()
+    return cookies_map
 
 
 def main():
     accounts = extract_cookies()
 
     if not accounts:
-        print("[!] 错误: 未找到任何有效 Cookie！")
-        print("    请在 GitHub 仓库 Settings -> Secrets 中添加以 GLADOS_COOKIE 开头的变量。")
+        print("[!] 错误: 未检测到任何以 GLADOS_COOKIE 开头的环境变量！")
+        print("    请检查 GitHub 仓库的 Secrets 配置。")
         sys.exit(1)
 
     print(f"[*] 成功扫描到 {len(accounts)} 个账号，开始依次签到：")
@@ -159,7 +128,7 @@ def main():
     for idx, name in enumerate(account_keys, start=1):
         cookie_val = accounts[name]
         client = GLaDOSCheckin(cookie=cookie_val, domain="glados.one")
-        
+
         if client.run(account_name=name):
             success_count += 1
 
