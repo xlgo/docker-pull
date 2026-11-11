@@ -1,10 +1,28 @@
 import hashlib
+import json
 import os
 import random
 import sys
 import time
 from typing import Any, Dict, Optional
 import requests
+
+
+def mask_email(email: str) -> str:
+    """邮箱脱敏工具函数，防止日志泄露隐私"""
+    if not email or "@" not in email:
+        return email or "未知"
+    
+    user, domain = email.split("@", 1)
+    if len(user) <= 2:
+        masked_user = user[0] + "***"
+    elif len(user) <= 5:
+        masked_user = user[0] + "***" + user[-1]
+    else:
+        # 大于5位，保留前2位和后2位
+        masked_user = user[:2] + "****" + user[-2:]
+        
+    return f"{masked_user}@{domain}"
 
 
 class GLaDOSCheckin:
@@ -73,6 +91,7 @@ class GLaDOSCheckin:
         """执行单账号签到"""
         print(f"\n>>>>>> 开始处理账号: [{account_name}] <<<<<<")
 
+        # 1. 获取挑战
         nonce = self.get_challenge()
         if not nonce:
             print("  [-] 获取 Nonce 失败，可能是 Cookie 已失效")
@@ -80,31 +99,32 @@ class GLaDOSCheckin:
 
         print(f"  [+] 成功获取 Nonce: {nonce[:8]}***")
 
-        # 模拟前端行为 2.6 ~ 3.5 秒随机延时
+        # 2. 模拟前端 2.6 ~ 3.5 秒随机延时
         internal_wait = round(random.uniform(2.6, 3.5), 2)
         print(f"  [*] 模拟前端行为，随机休眠 {internal_wait} 秒...")
         time.sleep(internal_wait)
 
-        # 计算 Proof 并提交签到
+        # 3. 计算 Proof
         proof = self.calculate_proof(nonce)
+
+        # 4. 提交签到
         result = self.submit_checkin(nonce, proof)
         print(f"  [*] 签到结果: {result.get('message', '无响应')}")
 
-        # 查询剩余天数
+        # 5. 查询剩余天数并脱敏展示
         status_info = self.get_status()
         if status_info and status_info.get("code") == 0:
             user_data = status_info.get("data", {})
-            email = user_data.get("email", "未配置邮箱")
+            raw_email = user_data.get("email", "未配置邮箱")
+            safe_email = mask_email(raw_email)  # 进行脱敏处理
             left_days = str(user_data.get("leftDays", "0")).split(".")[0]
-            print(f"  [+] 账户邮箱: {email} | 剩余天数: {left_days} 天")
+            print(f"  [+] 账户邮箱: {safe_email} | 剩余天数: {left_days} 天")
 
         return result.get("code") in [0, 1]
 
 
 def extract_cookies() -> Dict[str, str]:
-    """
-    自动从系统环境变量中识别所有以 GLADOS_COOKIE 开头的非空变量
-    """
+    """自动从系统环境变量中识别所有以 GLADOS_COOKIE 开头的非空变量"""
     cookies_map = {}
     for key, val in os.environ.items():
         if key.upper().startswith("GLADOS_COOKIE") and val.strip():
