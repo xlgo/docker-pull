@@ -29,4 +29,4 @@ jobs:
           GLADOS_COOKIE_2: ${{ secrets.GLADOS_COOKIE_XL7 }}
           GLADOS_COOKIE_3: ${{ secrets.GLADOS_COOKIE_775151 }}
           GLADOS_COOKIE_4: ${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}
-        run: python checkin.py
+        run: python glados/checkin.py
