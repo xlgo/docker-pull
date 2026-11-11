@@ -21,11 +21,12 @@ jobs:
 
       - name: 安装依赖
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install requests
 
       - name: 执行多账号自动签到
         env:
-          # 将所有 secrets 打包注入，脚本会自动识别 GLADOS_COOKIE 开头的字段
-          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+          GLADOS_COOKIE_1: ${{ secrets.GLADOS_COOKIE_36863 }}
+          GLADOS_COOKIE_2: ${{ secrets.GLADOS_COOKIE_XL7 }}
+          GLADOS_COOKIE_3: ${{ secrets.GLADOS_COOKIE_775151 }}
+          GLADOS_COOKIE_4: ${{ secrets.GLADOS_COOKIE_ZXL7_FOX }}
         run: python checkin.py
