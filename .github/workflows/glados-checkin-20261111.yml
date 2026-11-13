@@ -2,8 +2,8 @@ name: GLaDOS Auto Checkin
 
 on:
   schedule:
-    # 每天北京时间上午 08:30 自动执行 (UTC 时间 00:30)
-    - cron: '30 0 * * *'
+    # (UTC 时间)
+    - cron: '48 17 * * *'
   workflow_dispatch: # 支持手动点击测试
 
 jobs:
